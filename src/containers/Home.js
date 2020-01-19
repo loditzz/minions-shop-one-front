@@ -1,19 +1,15 @@
 import React, { useState, useEffect }           from "react";
-import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
+import { PageHeader, ListGroup, ListGroupItem, Col, Thumbnail, Button, Grid, Row } from "react-bootstrap";
 import { LinkContainer }                        from "react-router-bootstrap";
 import { API }                                  from "aws-amplify";
 import "./css/Home.css";
 
 export default function Home(props) {
-  const [minions, setMinions] = useState([]);
+  const [minions, setMinions]     = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function onLoad() {
-      /*if (!props.isAuthenticated) {
-        return;
-      }*/
-
       try {
         const minions = await loadMinions();
         setMinions(minions);
@@ -32,40 +28,41 @@ export default function Home(props) {
   }
 
   function renderMinionsList(minions) {
-  return [{}].concat(minions).map((minion, i) =>
-    i !== 0 ? (
-      <LinkContainer key={minion.minionId} to={`/minions/${minion.minionId}`}>
-        <ListGroupItem>
-         	<h4>{minion.descricao}</h4>
-        </ListGroupItem>
-      </LinkContainer>
-    ) : (
-      
-        <ListGroupItem>
-          <h4>
-            <b>{"\uFF0B"}</b> Escolha seu minion
-          </h4>
-        </ListGroupItem>
-      
-    )
-  );
-}
+	  return [{}].concat(minions).map((minion, i) =>
+      i !== 0 ? (
+	    <Col xs={6} md={4}>
+      <Thumbnail src={`http://minions-shop.s3.us-east-2.amazonaws.com/${minion.pic}`} alt="242x200">
+        <h3>{minion.descricao}</h3>
+        <p>
+        <LinkContainer key={minion.minionId} to={`/reservar/${minion.minionId}`}>
+          <Button bsStyle="primary" disabled={!props.isAuthenticated}>Reservar</Button>
+        </LinkContainer>
+        </p>
+      </Thumbnail>
+    </Col>
+    ) : (<p className={(props.isAuthenticated) ? 'autenticado':'nao-autenticado' }>Faça cadastre-se e/ou faça login para reservar um Minion!</p>)
+	  );
+  }
 
   function renderMinions() {
     return (
       <div className="notes">
-        <PageHeader>Escolha seu boneco!</PageHeader>
+        <PageHeader>Escolha seu boneco Minion e clique em Reservar!</PageHeader>
         <ListGroup>
           {renderMinionsList(minions)}
         </ListGroup>
-        <p className={(props.isAuthenticated) ? 'autenticado':'nao-autenticado' }>Faça login para reservar um boneco</p>
       </div>
     );
   }
 
   return (
     <div className="Home">
-      {renderMinions()}
+    <Grid>
+      <Row>
+        {renderMinions()}
+      </Row>
+    </Grid>
+      
     </div>
   );
 }

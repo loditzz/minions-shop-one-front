@@ -1,4 +1,5 @@
-#Bem vindo ao Minion Shop ONE FRONT-END!
+# Minions shop ONE (Front-end)!
 
-##Projeto desenvolvido com REACT
+### Bem-vindo ao projeto Minions shop ONE!
 
+Projeto desenvolvido com React 

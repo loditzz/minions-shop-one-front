@@ -29,7 +29,7 @@ function App(props) {
     setIsAuthenticating(false);
   }
 
-  async function handleLogout() {
+  async function handleSair() {
     await Auth.signOut();
     userHasAuthenticated(false);
     props.history.push("/login");
@@ -45,18 +45,24 @@ function App(props) {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav pullRight>
-              {isAuthenticated
-                ? <NavItem onClick={handleLogout}>Sair</NavItem>
-                : <>
-                    <LinkContainer to="/cadastro">
-                      <NavItem>Cadastre-se</NavItem>
-                    </LinkContainer>
-                    <LinkContainer to="/login">
-                      <NavItem>Login</NavItem>
-                    </LinkContainer>
-                  </>
-              }
+            <Nav pullRight>
+              {isAuthenticated ? (
+                <>
+                  <LinkContainer to="/pedidos">
+                    <NavItem>Minhas Reservas</NavItem>
+                  </LinkContainer>
+                  <NavItem onClick={handleSair}>Sair</NavItem>
+                </>
+              ) : (
+                <>
+                  <LinkContainer to="/cadastro">
+                    <NavItem>Cadastre-se</NavItem>
+                  </LinkContainer>
+                  <LinkContainer to="/login">
+                    <NavItem>Login</NavItem>
+                  </LinkContainer>
+                </>
+              )}
             </Nav>
         </Navbar.Collapse>
       </Navbar>

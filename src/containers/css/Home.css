@@ -25,3 +25,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.thumbnail>img {
+  width: 200px !important;
+}
