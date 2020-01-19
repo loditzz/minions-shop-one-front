@@ -30,7 +30,7 @@ export default function Cadastro(props) {
 
   function validaSenhas(){
     return(
-        (fields.email.length !== 0 ||
+        ( fields.email.length !== 0 ||
         fields.password.length !== 0 ) &&
         fields.password !== fields.confirmPassword
       );

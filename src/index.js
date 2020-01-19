@@ -19,7 +19,7 @@ import './index.css';
     API: {
       endpoints: [
         {
-          name: "notes",
+          name: "minions-shop-one",
           endpoint: config.apiGateway.URL,
           region: config.apiGateway.REGION
         },
