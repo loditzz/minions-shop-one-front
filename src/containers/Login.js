@@ -1,8 +1,8 @@
-import React, { useState }                              from "react";
-import { Auth }                                         from "aws-amplify";
+import React, { useState }                      from "react";
+import { Auth }                                 from "aws-amplify";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import LoaderButton                                     from "../components/LoaderButton";
-import { useFormFields }                                from "../libs/hooksLib";
+import LoaderButton                             from "../components/LoaderButton";
+import { useFormFields }                        from "../libs/hooksLib";
 import "./css/Login.css";
 
 export default function Login(props) {

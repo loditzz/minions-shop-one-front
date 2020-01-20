@@ -1,7 +1,6 @@
-import React, { useState, useEffect }           from "react";
-import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
-import { LinkContainer }                        from "react-router-bootstrap";
-import { API }                                  from "aws-amplify";
+import React, { useState, useEffect } from "react";
+import { PageHeader, ListGroup }      from "react-bootstrap";
+import { API }                        from "aws-amplify";
 import "./css/Pedidos.css";
 
 export default function Pedidos(props) {
@@ -36,8 +35,8 @@ export default function Pedidos(props) {
     return [{}].concat(pedidos).map((pedido, i) =>
      pedidos.length > 0? (
         i>0 ?
-          (<ListGroupItem header={pedido.pedidoId}>
-            <p>Referencia: {pedido.minionId}</p>
+          (<ListGroupItem header={"Numero da reserva: " + pedido.pedidoId}>
+            <p>Referencia do produto: {pedido.minionId}</p>
             {"Reservado em: " + new Date(pedido.createdAt).toLocaleString()}
           </ListGroupItem>) : ( 
           <ListGroupItem>

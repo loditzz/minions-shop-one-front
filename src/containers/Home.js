@@ -1,5 +1,6 @@
 import React, { useState, useEffect }           from "react";
-import { PageHeader, ListGroup, ListGroupItem, Col, Thumbnail, Button, Grid, Row } from "react-bootstrap";
+import { PageHeader, ListGroup, ListGroupItem, 
+  Col, Thumbnail, Button, Grid, Row }           from "react-bootstrap";
 import { LinkContainer }                        from "react-router-bootstrap";
 import { API }                                  from "aws-amplify";
 import "./css/Home.css";

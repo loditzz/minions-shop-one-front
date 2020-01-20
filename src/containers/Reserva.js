@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
-import { API}                                 from "aws-amplify";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import LoaderButton from "../components/LoaderButton";
+import React, { useState, useEffect }         from "react";
+import { API, Auth}                           from "aws-amplify";
+import { Col, Thumbnail, Button, Grid, Row  } from "react-bootstrap";
+import LoaderButton                           from "../components/LoaderButton";
 
 export default function Reserva(props) {
   const [minion, setMinion]       = useState(null);
@@ -17,9 +17,9 @@ export default function Reserva(props) {
     async function onLoad() {
       try {
         const minion        = await loadMinion();
-        const { descricao } = minion;
+        const { descricao, minionId } = minion;
 
-        setContent(descricao);
+        setContent(minionId);
         setMinion(minion);
       } catch (e) {
         alert(e);
@@ -35,6 +35,18 @@ export default function Reserva(props) {
     });
   }
 
+ async function enviaEmail(){
+    var data = minion;
+    var email = await Auth.currentAuthenticatedUser().then((user)=>{
+        return user.attributes.email;     
+      });
+    data.usuario = email;
+    console.log(data);
+    return API.post("minions-shop-one", `/emailone`, {
+      body: data
+    });
+  }  
+
   async function handleSubmit(event) {
 
     event.preventDefault();
@@ -44,6 +56,8 @@ export default function Reserva(props) {
       await savePedido({
         content
       });
+      enviaEmail();
+      alert('Minion reservado com sucesso!')
       props.history.push("/");
     } catch (e) {
       alert(e);
@@ -55,23 +69,26 @@ export default function Reserva(props) {
     <div className="Notes">
       {minion && (
         <form onSubmit={handleSubmit}>
-          <FormGroup controlId="content">
-          <FormControl
-              value={minion.minionId}
-              componentClass="textarea"
-            />
-            <img src={`http://minions-shop.s3.us-east-2.amazonaws.com/${minion.pic}`}></img>
-            <h2><b>Reservar: </b>{minion.descricao}</h2>
-          </FormGroup>
-          <LoaderButton
+          <Grid>
+  <Row>
+    <Col xs={12} md={12}>
+      <Thumbnail src={`http://minions-shop.s3.us-east-2.amazonaws.com/${minion.pic}`} alt="Minion-Pic">
+        <h3><b>Reservar: </b>{minion.descricao}</h3>
+        <p><b>Referencia: </b>{minion.minionId}</p>
+        <p>
+        <LoaderButton
             block
             type="submit"
-            bsSize="large"
             bsStyle="primary"
             isLoading={isLoading}
           >
             Confirmar Reserva
           </LoaderButton>
+        </p>
+      </Thumbnail>
+    </Col>
+  </Row>
+</Grid>    
         </form>
       )}
     </div>
