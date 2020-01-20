@@ -105,6 +105,7 @@ async function handleConfirmationSubmit(event) {
   function renderForm() {
     return (
       <form onSubmit={handleSubmit}>
+      <p>A senha deve ter: tamanho minimo de 8 caracteres, pelo menos um número, pelo menos uma letra maíuscula e pelo menos um caractere especial</p>
         <FormGroup controlId="email" bsSize="large">
           <ControlLabel>Email</ControlLabel>
           <FormControl
@@ -129,7 +130,7 @@ async function handleConfirmationSubmit(event) {
             onChange={handleFieldChange}
             value={fields.confirmPassword}
           />
-        </FormGroup>
+        </FormGroup>        
         <p className={(validaSenhas())? 'senhas-diferentes':'senhas-iguais' }>Senhas devem ser iguais</p>
         <LoaderButton
           block

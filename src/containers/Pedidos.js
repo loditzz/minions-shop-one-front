@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { PageHeader, ListGroup }      from "react-bootstrap";
-import { API }                        from "aws-amplify";
+import React, { useState, useEffect }           from "react";
+import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
+import { API }                                  from "aws-amplify";
 import "./css/Pedidos.css";
 
 export default function Pedidos(props) {

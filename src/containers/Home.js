@@ -41,7 +41,7 @@ export default function Home(props) {
         </p>
       </Thumbnail>
     </Col>
-    ) : (<p className={(props.isAuthenticated) ? 'autenticado':'nao-autenticado' }>Faça cadastre-se e/ou faça login para reservar um Minion!</p>)
+    ) : (<p className={(props.isAuthenticated) ? 'autenticado':'nao-autenticado' }>Cadastre-se ou faça login para reservar um Minion!</p>)
 	  );
   }
 
